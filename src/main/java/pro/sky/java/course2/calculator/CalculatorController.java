@@ -1,9 +1,6 @@
 package pro.sky.java.course2.calculator;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/calculator")
@@ -37,6 +34,12 @@ public class CalculatorController {
     @GetMapping("/divide")
     public String devide(@RequestParam("num1") String num1, @RequestParam("num2") String num2) {
         return calculatorService.divide(num1, num2);
+    }
+
+    @ExceptionHandler(DivideByZero.class)
+    public String handleDivideByZeroException(DivideByZero e) {
+        String result = e.getMessage() + "<br><br>Содержимое ResponseStatus: " + e.getClass().getAnnotation(ResponseStatus.class).value();
+        return result;
     }
 
 }
