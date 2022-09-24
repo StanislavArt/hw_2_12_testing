@@ -99,7 +99,7 @@ public class CalculatorServiceImpl implements CalculatorService {
 
         // проверка на нуль
         if (Math.abs(num2) < 2 * Double.MIN_VALUE ) {
-            return "Ошибка! В переменной \"num2\" указан нуль!";
+            throw new DivideByZero();
         }
 
         double result = num1 / num2;
